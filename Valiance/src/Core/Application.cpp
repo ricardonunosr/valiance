@@ -3,6 +3,14 @@
 #include "glad/glad.h"
 
 #include <memory>
+#include <iostream>
+
+#include "VertexArray.h"
+#include "VertexBuffer.h"
+#include "VertexBufferLayout.h"
+#include "IndexBuffer.h"
+#include "Shader.h"
+#include "Util/OpenGLDebug.h"
 
 #include "imgui.h"
 #include "imgui_impl_glfw.h"
@@ -10,7 +18,6 @@
 
 namespace Valiance
 {
-
 	Application::Application()
 	{
 		m_Window = std::make_unique<Window>();
@@ -24,6 +31,10 @@ namespace Valiance
 		ImGui_ImplGlfw_InitForOpenGL(m_Window->GetWindow(), true);
 		ImGui_ImplOpenGL3_Init((char*)glGetString(GL_NUM_SHADING_LANGUAGE_VERSIONS));
 
+		std::cout << "Using GL Version: " << glGetString(GL_VERSION) << std::endl;
+
+		Valiance::Utils::EnableOpenGLDebugging();
+
 		m_Running = true;
 	}
 
@@ -34,25 +45,21 @@ namespace Valiance
 
 	void Application::Run()
 	{
-		float m_ClearColor[4]{ 0.8f, 0.4f, 0.2f, 1.0f };
-
+		
 		while (m_Running)
 		{
-			/* Render here */
 			glClear(GL_COLOR_BUFFER_BIT);
 
-			glBegin(GL_TRIANGLES);
-			glVertex2f(-0.5f, -0.5f);
-			glVertex2f(0.5f, -0.5f);
-			glVertex2f(0, 0.5f);
-			glEnd();
-
+			for (Layer* layer : m_LayerStack)
+				layer->OnUpdate();
+			
 			ImGui_ImplOpenGL3_NewFrame();
 			ImGui_ImplGlfw_NewFrame();
 			ImGui::NewFrame();
 
 			ImGui::Begin("Test");
-			ImGui::ColorEdit4("Clear Color", m_ClearColor);
+			for (Layer* layer : m_LayerStack)
+				layer->OnImGuiRender();
 			ImGui::End();
 
 			ImGui::Render();
@@ -60,6 +67,11 @@ namespace Valiance
 
 			m_Window->OnUpdate();
 		}
+	}
+
+	void Application::PushLayer(Layer* layer)
+	{
+		m_LayerStack.PushLayer(layer);
 	}
 
 }

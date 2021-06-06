@@ -20,6 +20,11 @@ namespace Valiance
 		if (!glfwInit())
 			std::cout << "Couldn't Initialize GLFW" << std::endl;
 
+		glfwSetErrorCallback([](int error_code, const char* description)
+		{
+			std::cout << "Error Code: " << error_code << ", Error: " << description << '\n';
+		});
+
 		m_Window = glfwCreateWindow(800, 600, "Hello World", NULL, NULL);
 		if (!m_Window)
 		{
