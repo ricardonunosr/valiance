@@ -2,9 +2,7 @@
 
 int main()
 {
-	auto app = new Valiance::Application();
-
-	app->Run();
-
-	delete app;
+    auto app = new Valiance::Application();
+    app->Run();
+    delete app;
 }

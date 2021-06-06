@@ -1,54 +1,62 @@
 #pragma once
 
-#include <vector>
 #include "glad/glad.h"
+#include <vector>
 
 namespace Valiance
 {
-	struct VertexBufferElement
-	{
-		unsigned int type;
-		unsigned int count;
-		unsigned char normalized;
-			
-		//Done because can be different sizes in various implementations
-		static unsigned int GetTypeSize(unsigned int type)
-		{
-			switch (type)
-			{
-			case GL_FLOAT: return 4;
-			case GL_UNSIGNED_INT: return 4;
-			case GL_UNSIGNED_BYTE:return 1;
-			}
+    struct VertexBufferElement
+    {
+        unsigned int type;
+        unsigned int count;
+        unsigned char normalized;
 
-			return 0;
-		}
-	};
+        // Done because can be different sizes in various implementations
+        static unsigned int GetTypeSize(unsigned int type)
+        {
+            switch (type)
+            {
+            case GL_FLOAT:
+                return 4;
+            case GL_UNSIGNED_INT:
+                return 4;
+            case GL_UNSIGNED_BYTE:
+                return 1;
+            }
 
-	class VertexBufferLayout
-	{
-	public:
-		VertexBufferLayout()
-			:m_Stride(0){}
-		
-		template<typename T>
-		void Push(unsigned int count)
-		{
-			static_assert(false);
-		}
+            return 0;
+        }
+    };
 
-		template<>
-		void Push<float>(unsigned int count)
-		{
-			m_Elements.push_back({GL_FLOAT,count,GL_FALSE});
-			m_Stride += count * VertexBufferElement::GetTypeSize(GL_FLOAT);
-		}
-	
-		inline unsigned int GetStride() const { return m_Stride; }
-		inline std::vector<VertexBufferElement> GetElements() const { return m_Elements; }
+    class VertexBufferLayout
+    {
+      public:
+        VertexBufferLayout() : m_Stride(0)
+        {
+        }
 
-	private:
-		std::vector<VertexBufferElement> m_Elements;
-		unsigned int m_Stride;
-	};
-}
+        template <typename T> void Push(unsigned int count)
+        {
+            static_assert(false);
+        }
+
+        template <> void Push<float>(unsigned int count)
+        {
+            m_Elements.push_back({GL_FLOAT, count, GL_FALSE});
+            m_Stride += count * VertexBufferElement::GetTypeSize(GL_FLOAT);
+        }
+
+        inline unsigned int GetStride() const
+        {
+            return m_Stride;
+        }
+        inline std::vector<VertexBufferElement> GetElements() const
+        {
+            return m_Elements;
+        }
+
+      private:
+        std::vector<VertexBufferElement> m_Elements;
+        unsigned int m_Stride;
+    };
+} // namespace Valiance

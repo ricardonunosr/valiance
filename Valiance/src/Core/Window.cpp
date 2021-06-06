@@ -1,49 +1,45 @@
 #include "Window.h"
-
 #include <iostream>
 
 namespace Valiance
 {
+    Window::Window()
+    {
+        Init();
+    }
 
-	Window::Window()
-	{
-		Init();
-	}
+    Window::~Window()
+    {
+        glfwTerminate();
+    }
 
-	Window::~Window()
-	{
-		glfwTerminate();
-	}
+    void Window::Init()
+    {
+        if (!glfwInit())
+            std::cout << "Couldn't Initialize GLFW" << std::endl;
 
-	void Window::Init()
-	{
-		if (!glfwInit())
-			std::cout << "Couldn't Initialize GLFW" << std::endl;
+        glfwSetErrorCallback([](int error_code, const char *description) {
+            std::cout << "Error Code: " << error_code << ", Error: " << description << '\n';
+        });
 
-		glfwSetErrorCallback([](int error_code, const char* description)
-		{
-			std::cout << "Error Code: " << error_code << ", Error: " << description << '\n';
-		});
+        m_Window = glfwCreateWindow(800, 600, "Hello World", NULL, NULL);
+        if (!m_Window)
+        {
+            glfwTerminate();
+            std::cout << "Couldn't create window" << std::endl;
+        }
 
-		m_Window = glfwCreateWindow(800, 600, "Hello World", NULL, NULL);
-		if (!m_Window)
-		{
-			glfwTerminate();
-			std::cout << "Couldn't create window" << std::endl;
-		}
+        glfwMakeContextCurrent(m_Window);
 
-		glfwMakeContextCurrent(m_Window);
+        glfwSetWindowCloseCallback(m_Window, [](GLFWwindow *) {
+            // TODO Event system
+        });
+    }
 
-		glfwSetWindowCloseCallback(m_Window, [](GLFWwindow*)
-		{
-			//TODO Event system
-		});
-	}
+    void Window::OnUpdate()
+    {
+        glfwSwapBuffers(m_Window);
+        glfwPollEvents();
+    }
 
-	void Window::OnUpdate()
-	{
-		glfwSwapBuffers(m_Window);
-		glfwPollEvents();
-	}
-
-}
+} // namespace Valiance
