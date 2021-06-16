@@ -8,8 +8,9 @@ project "01-HelloWorld"
 
     files
 	{
-		"%{wks.location}/Examples/%{prj.name}/src/**.h",
-		"%{wks.location}/Examples/%{prj.name}/src/**.cpp",
+		"src/**.h",
+		"src/**.cpp",
+        "assets/**/*",
         "%{wks.location}/Valiance/vendor/glm/glm/**.hpp",
         "%{wks.location}/Valiance/vendor/glm/glm/**.inl",
 	}

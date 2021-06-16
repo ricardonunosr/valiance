@@ -12,7 +12,8 @@ project "Valiance"
         "src/*/**.cpp",
         "vendor/glm/glm/**.hpp",
         "vendor/glm/glm/**.inl",
-        "assets/**/*",
+        "vendor/stb_image/**.cpp",
+        "vendor/stb_image/**.h",
     }
  
     includedirs
@@ -21,7 +22,8 @@ project "Valiance"
         "vendor/GLFW/include",
         "vendor/Glad/include",
         "vendor/glm",
-        "vendor/imgui"
+        "vendor/imgui",
+        "vendor/stb_image"
     }
 
     libdirs 

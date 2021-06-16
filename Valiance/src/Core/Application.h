@@ -15,9 +15,19 @@ namespace Valiance
         void Run();
         void PushLayer(Layer *layer);
 
+        static Application &Get()
+        {
+            return *s_Instance;
+        }
+
+        Window& GetWindow()
+        {
+            return *m_Window;
+        }
+
       private:
+        static Application *s_Instance;
         std::unique_ptr<Window> m_Window;
-        bool m_Running;
         LayerStack m_LayerStack;
     };
 } // namespace Valiance

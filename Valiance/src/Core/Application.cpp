@@ -16,25 +16,31 @@
 
 namespace Valiance
 {
+    // Singleton
+    Application *Application::s_Instance = nullptr;
+
     Application::Application()
     {
+        s_Instance = this;
         m_Window = std::make_unique<Window>();
 
+        
+
         int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
+
+        glEnable(GL_DEPTH_TEST);  
 
         IMGUI_CHECKVERSION();
         ImGui::CreateContext();
         ImGuiIO &io = ImGui::GetIO();
         (void)io;
         ImGui::StyleColorsDark();
-        ImGui_ImplGlfw_InitForOpenGL(m_Window->GetWindow(), true);
+        ImGui_ImplGlfw_InitForOpenGL(m_Window->GetNativeWindow(), true);
         ImGui_ImplOpenGL3_Init((char *)glGetString(GL_NUM_SHADING_LANGUAGE_VERSIONS));
 
         std::cout << "Using GL Version: " << glGetString(GL_VERSION) << std::endl;
 
         Valiance::Utils::EnableOpenGLDebugging();
-
-        m_Running = true;
     }
 
     Application::~Application()
@@ -43,9 +49,9 @@ namespace Valiance
 
     void Application::Run()
     {
-        while (m_Running)
+        while (m_Window->IsActive())
         {
-            glClear(GL_COLOR_BUFFER_BIT);
+            glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
             for (Layer *layer : m_LayerStack)
                 layer->OnUpdate();

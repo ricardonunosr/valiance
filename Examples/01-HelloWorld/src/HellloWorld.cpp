@@ -43,7 +43,7 @@ void HelloWorldLayer::OnAttach()
 
     vao->AddBuffer(*vb, layout);
 
-    shader = std::make_unique<Shader>("../../Valiance/assets/shaders/Basic.shader");
+    shader = std::make_unique<Shader>("assets/shaders/Basic.shader");
 
     ib->Bind();
     shader->Bind();

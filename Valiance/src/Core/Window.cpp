@@ -13,6 +13,12 @@ namespace Valiance
         glfwTerminate();
     }
 
+    bool m_WindowClosed = false;
+    void OnWindowCloseCallback(GLFWwindow *window)
+    {
+        m_WindowClosed = true;
+    }
+
     void Window::Init()
     {
         if (!glfwInit())
@@ -31,15 +37,22 @@ namespace Valiance
 
         glfwMakeContextCurrent(m_Window);
 
-        glfwSetWindowCloseCallback(m_Window, [](GLFWwindow *) {
-            // TODO Event system
-        });
+        glfwSetWindowCloseCallback(m_Window, OnWindowCloseCallback);
+
+        m_IsActive = true;
     }
 
     void Window::OnUpdate()
     {
         glfwSwapBuffers(m_Window);
         glfwPollEvents();
+
+        if (m_WindowClosed)
+        {
+            m_IsActive = false;
+            m_WindowClosed = false;
+        }
     }
+
 
 } // namespace Valiance
