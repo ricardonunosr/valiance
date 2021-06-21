@@ -3,7 +3,7 @@
 
 namespace Valiance
 {
-    VertexBuffer::VertexBuffer(const void *data, unsigned int size)
+    VertexBuffer::VertexBuffer(const VertexBufferLayout &layout, const void *data, unsigned int size) : m_Layout{layout}
     {
         glCreateBuffers(1, &m_RendererID);
         glBindBuffer(GL_ARRAY_BUFFER, m_RendererID);
@@ -15,12 +15,12 @@ namespace Valiance
         glDeleteBuffers(1, &m_RendererID);
     }
 
-    void VertexBuffer::Bind()
+    void VertexBuffer::Bind() const
     {
         glBindBuffer(GL_ARRAY_BUFFER, m_RendererID);
     }
 
-    void VertexBuffer::Unbind()
+    void VertexBuffer::Unbind() const
     {
         glBindBuffer(GL_ARRAY_BUFFER, 0);
     }

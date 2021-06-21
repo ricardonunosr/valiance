@@ -26,7 +26,11 @@ Run the bat `WinGenerateProjects.bat` this will run premake and generate Solutio
 
 ##### 01-HelloWorld
 <p align="center">
-  <img src="https://i.imgur.com/O4n59JA.png" />
+  <img src="Examples/01-HelloWorld/assets/01-HelloWorld.png" />
+</p>
+##### 02-Instancing
+<p align="center">
+  <img src="Examples/02-Instancing/assets/02-Instancing.png" />
 </p>
 
 ## Acknowledgements

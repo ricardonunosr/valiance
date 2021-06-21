@@ -8,6 +8,7 @@ project "Valiance"
  
     files 
     { 
+        "src/*.h", 
         "src/*/**.h", 
         "src/*/**.cpp",
         "vendor/glm/glm/**.hpp",

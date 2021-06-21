@@ -3,9 +3,9 @@
 
 namespace Valiance
 {
-    Window::Window()
+    Window::Window(const WindowProps &props)
     {
-        Init();
+        Init(props);
     }
 
     Window::~Window()
@@ -19,7 +19,7 @@ namespace Valiance
         m_WindowClosed = true;
     }
 
-    void Window::Init()
+    void Window::Init(const WindowProps &props)
     {
         if (!glfwInit())
             std::cout << "Couldn't Initialize GLFW" << std::endl;
@@ -28,7 +28,7 @@ namespace Valiance
             std::cout << "Error Code: " << error_code << ", Error: " << description << '\n';
         });
 
-        m_Window = glfwCreateWindow(800, 600, "Hello World", NULL, NULL);
+        m_Window = glfwCreateWindow(props.width, props.height, props.title.c_str(), NULL, NULL);
         if (!m_Window)
         {
             glfwTerminate();

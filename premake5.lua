@@ -14,6 +14,7 @@ group "Engine/Dependencies"
 group ""
 
 group "Examples"
+    include "Examples/00-Sandbox"
 	include "Examples/01-HelloWorld"
     include "Examples/02-Instancing"
 group ""

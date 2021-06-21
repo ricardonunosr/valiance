@@ -21,16 +21,17 @@ class InstancingLayer : public Valiance::Layer
   private:
     std::unique_ptr<Valiance::VertexArray> vao;
     std::unique_ptr<Valiance::VertexBuffer> vb;
+    std::unique_ptr<Valiance::VertexBuffer> vbTranslations;
+    std::unique_ptr<Valiance::VertexBuffer> vbColors;
     std::unique_ptr<Valiance::IndexBuffer> ib;
     std::unique_ptr<Valiance::Shader> shader;
     std::unique_ptr<Valiance::Texture> texture;
     glm::mat4 m_MVP;
-    glm::mat4 m_Proj;
-    glm::mat4 m_View;
     glm::mat4 m_Model;
-    glm::vec3 m_RotationVector;
     std::unique_ptr<Valiance::Utils::PerspectiveCamera> m_Camera;
-    float m_Radians;
+    bool show_app_debug;
+
+    static const uint32_t kNUM_INSTANCES = 40000;
 };
 
 class Instancing : public Valiance::Application

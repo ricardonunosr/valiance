@@ -24,11 +24,9 @@ namespace Valiance
         s_Instance = this;
         m_Window = std::make_unique<Window>();
 
-        
-
         int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
 
-        glEnable(GL_DEPTH_TEST);  
+        glEnable(GL_DEPTH_TEST);
 
         IMGUI_CHECKVERSION();
         ImGui::CreateContext();
@@ -60,10 +58,8 @@ namespace Valiance
             ImGui_ImplGlfw_NewFrame();
             ImGui::NewFrame();
 
-            ImGui::Begin("Test");
             for (Layer *layer : m_LayerStack)
                 layer->OnImGuiRender();
-            ImGui::End();
 
             ImGui::Render();
             ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());

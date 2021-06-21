@@ -6,6 +6,7 @@ namespace Valiance::Utils
 {
     PerspectiveCamera::PerspectiveCamera() 
     {
+        m_Projection = glm::perspective(glm::radians(95.0f), 1280.0f / 720.0f, 0.1f, 1000.0f);
         m_CameraPos = glm::vec3(0.0f, 0.0f, 0.0f);
         m_CameraUp = glm::vec3(0.0f, 1.0f, 0.0f);
         m_CameraFront = glm::vec3(0.0f, 0.0f, -1.0f);

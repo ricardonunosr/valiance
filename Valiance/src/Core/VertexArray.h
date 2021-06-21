@@ -10,11 +10,12 @@ namespace Valiance
       public:
         VertexArray();
         ~VertexArray();
-        void Bind();
-        void Unbind();
-        void AddBuffer(VertexBuffer &vb, const VertexBufferLayout &layout);
+        void Bind() const;
+        void Unbind() const;
+        void AddBuffer(VertexBuffer &vb);
 
       private:
         unsigned int m_RendererID;
+        unsigned int m_EnableAtribs;
     };
 } // namespace Valiance

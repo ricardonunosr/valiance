@@ -34,14 +34,14 @@ void HelloWorldLayer::OnAttach()
     };
 
     vao = std::make_unique<VertexArray>();
-    vb = std::make_unique<VertexBuffer>(vertices, 18 * sizeof(float));
-    VertexBufferLayout layout;
-    layout.Push<float>(3);
-    layout.Push<float>(3);
+
+    VertexBufferLayout layout{{"aPos", DataType::Float3}, {"aColor", DataType::Float3}};
+
+    vb = std::make_unique<VertexBuffer>(layout, vertices, 18 * sizeof(float));
 
     ib = std::make_unique<IndexBuffer>(indices, 6);
 
-    vao->AddBuffer(*vb, layout);
+    vao->AddBuffer(*vb);
 
     shader = std::make_unique<Shader>("assets/shaders/Basic.shader");
 
@@ -60,7 +60,7 @@ void HelloWorldLayer::OnImGuiRender()
 
 void HelloWorldLayer::OnUpdate()
 {
-    glClearColor(m_ClearColor[0], m_ClearColor[1], m_ClearColor[2], m_ClearColor[3]);
+    Renderer::SetClearColor(m_ClearColor[0], m_ClearColor[1], m_ClearColor[2], m_ClearColor[3]);
 
-    glDrawElements(GL_TRIANGLES, ib->GetCount(), GL_UNSIGNED_INT, 0);
+    Renderer::DrawIndexed(*vao, *ib);
 }

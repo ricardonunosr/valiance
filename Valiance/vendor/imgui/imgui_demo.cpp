@@ -257,6 +257,7 @@ static void ShowDemoWindowMisc();
 // You may execute this function to experiment with the UI and understand what it does.
 // You may then search for keywords in the code when you are interested by a specific feature.
 void ImGui::ShowDemoWindow(bool* p_open)
+
 {
     // Exceptionally add an extra assert here for people confused about initial Dear ImGui setup
     // Most ImGui functions would normally just crash if the context is missing.
