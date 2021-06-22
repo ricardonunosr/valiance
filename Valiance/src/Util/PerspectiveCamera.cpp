@@ -4,7 +4,7 @@
 
 namespace Valiance::Utils
 {
-    PerspectiveCamera::PerspectiveCamera() 
+    PerspectiveCamera::PerspectiveCamera()
     {
         m_Projection = glm::perspective(glm::radians(95.0f), 1280.0f / 720.0f, 0.1f, 1000.0f);
         m_CameraPos = glm::vec3(0.0f, 0.0f, 0.0f);
@@ -38,4 +38,4 @@ namespace Valiance::Utils
         m_View = glm::lookAt(m_CameraPos, m_CameraPos + m_CameraFront, m_CameraUp);
     }
 
-} // namespace Valiance
+} // namespace Valiance::Utils
