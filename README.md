@@ -37,9 +37,3 @@ Run the bat `WinGenerateProjects.bat` this will run premake and generate Solutio
 ## Acknowledgements
 
 - Highly inspired by [Hazel](https://github.com/TheCherno/Hazel) by [TheCherno](https://github.com/TheCherno)
-
-## Contact
-[Portfolio](https://ricardonunosr.github.io/)
-
-
-
